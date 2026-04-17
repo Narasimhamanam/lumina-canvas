@@ -1,10 +1,14 @@
-import { ArrowUpRight, Instagram, Youtube, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, Instagram, Youtube, Linkedin, Mail, MessageCircle } from "lucide-react";
 
 const socials = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "YouTube" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:hello@aidenvance.com", label: "Email" },
+  { icon: Instagram, href: "https://instagram.com/narasimhachowdary_", label: "Instagram" },
+  { icon: Youtube, href: "https://www.youtube.com/@Flickfusion_beats", label: "YouTube" },
+  { 
+  icon: MessageCircle, 
+  href: "https://wa.me/917386464170", 
+  label: "WhatsApp" 
+},
+{ icon: Mail, href: "mailto:narasimhamanam6014@gmail.com", label: "Email" },
 ];
 
 const Footer = () => {
@@ -15,25 +19,25 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="mb-20 text-center">
           <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            / Let&apos;s collaborate
+            It&apos;s your time
           </div>
           <h2 className="font-display text-[clamp(2.5rem,8vw,7rem)] font-bold leading-none tracking-tight">
-            <span className="text-foreground">Got a</span>{" "}
-            <span className="text-gradient-primary italic">vision?</span>
+            <span className="text-foreground">Want to</span>{" "}
+            <span className="text-gradient-primary italic">collaborate?</span>
           </h2>
           <a
-            href="mailto:hello@aidenvance.com"
+            href="mailto:narasimhamanam6014@gmail.com"
             data-cursor="hover"
             className="mt-10 inline-flex items-center gap-3 font-display text-xl text-foreground transition-colors hover:text-primary sm:text-2xl"
           >
-            hello@aidenvance.com
+            narasimhamanam6014@gmail.com
             <ArrowUpRight className="h-5 w-5" />
           </a>
         </div>
 
         <div className="grid grid-cols-1 items-center gap-8 border-t border-white/5 pt-8 md:grid-cols-3">
           <div className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">
-            © {new Date().getFullYear()} Aiden Vance Studio
+            © {new Date().getFullYear()} Narasimha Manam Edits
           </div>
 
           <div className="flex justify-center gap-3">

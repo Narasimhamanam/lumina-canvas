@@ -51,9 +51,9 @@ const CinematicLoader = ({ onDone }: { onDone: () => void }) => {
         <div className="absolute h-[140px] w-[140px] rounded-full bg-gradient-to-br from-primary/40 to-secondary/40 blur-2xl animate-portal-pulse" />
 
         <div className="relative z-10 text-center">
-          <div className="font-display text-3xl tracking-[0.4em] text-gradient-primary">AV</div>
+          <div className="font-display text-3xl tracking-[0.4em] text-gradient-primary">NM</div>
           <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            Loading Cinematic Experience
+            Loading Editor Portfolio
           </div>
         </div>
       </div>

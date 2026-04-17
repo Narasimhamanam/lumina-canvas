@@ -1,29 +1,34 @@
 import { useEffect, useRef, useState } from "react";
 import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import A2 from "@/assets/A2.jpg";
+import A1 from "@/assets/A1.jpg";
+import A3 from "@/assets/A3.jpg";
 
+// cspell: disable
 const items = [
   {
     quote:
-      "Aiden turned 40 hours of footage into a 60-second piece that made our investors cry. Genuine wizardry.",
-    name: "Maya Chen",
-    role: "Creative Director, Northwind",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
+      "Anna, thank you so much for the edit. Video came out super clean and exactly how I wanted.",
+    name: "Akhila Bevara",
+    role: "Client",
+    avatar: A1
   },
   {
     quote:
-      "His grade gave our music video a soul. Every frame feels intentional, every cut earns its place.",
-    name: "Liam Okafor",
-    role: "Director, Lyric Records",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+      "Bro, really happy with the final output. Effects and transitions were too good. Thanks a lot!",
+    name: "Ajith Kumar",
+    role: "Client",
+    avatar: A2
   },
   {
     quote:
-      "Insanely fast turnaround without sacrificing taste. The kind of editor every brand wishes they had.",
-    name: "Sofia Romero",
-    role: "Brand Lead, Maison Voss",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80",
+      "Thanks brother, video edit was awesome. Everyone liked it and quality was top class.",
+    name: "Pavan Kumar",
+    role: "Client",
+    avatar: A3
   },
 ];
+// cspell: enable
 
 const Testimonials = () => {
   const [i, setI] = useState(0);

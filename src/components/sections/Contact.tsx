@@ -63,17 +63,17 @@ const Contact = () => {
         </div>
 
         <h2 className="mb-10 font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.05]">
-          <span className="text-foreground">Tell me your</span>{" "}
-          <span className="text-gradient-primary italic">story.</span>
+          <span className="text-foreground">If you need a</span>{" "}
+          <span className="text-gradient-primary italic">Project.</span>
         </h2>
 
         <form onSubmit={onSubmit} className="glass-strong rounded-2xl p-6 sm:p-10 space-y-6" noValidate>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <Field label="Name" name="name" placeholder="Your full name" error={errors.name} />
-            <Field label="Email" name="email" type="email" placeholder="you@studio.com" error={errors.email} />
+            <Field label="Email" name="email" type="email" placeholder="you@gmail.com" error={errors.email} />
           </div>
 
-          <Field label="Budget (optional)" name="budget" placeholder="$5k – $25k" error={errors.budget} />
+          <Field label="Budget (optional)" name="budget" placeholder=">100rs" error={errors.budget} />
 
           <div>
             <label className="mb-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
@@ -83,7 +83,7 @@ const Contact = () => {
               name="message"
               rows={5}
               maxLength={1200}
-              placeholder="Tell me about the vision, timeline, deliverables…"
+              placeholder="Tell me about the Edit type, theme, song, duration…"
               data-cursor="hover"
               className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary/60 focus:shadow-[0_0_30px_hsl(var(--primary)/0.15)]"
             />

@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 import MagneticButton from "@/components/MagneticButton";
-import profile from "@/assets/profile.jpg";
+import profile from "@/assets/profile.png";
 import { Play, ArrowDown } from "lucide-react";
 
 const HeroFrame = lazy(() => import("@/components/three/HeroFrame"));
@@ -24,20 +24,19 @@ const Hero = () => {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/80">
-              Available for Q3 / Q4 projects
+              Available for Projects
             </span>
           </div>
 
           <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold leading-[0.95] tracking-tight">
-            <span className="block text-foreground">Cinematic</span>
-            <span className="block text-gradient-primary">Story</span>
-            <span className="block text-foreground/90">in Motion.</span>
+            {/* <span className="block text-foreground">Mobile</span> */}
+            <span className="block text-gradient-primary">Video</span>
+            <span className="block text-foreground/90">Editor</span>
           </h1>
 
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            I&apos;m <span className="text-foreground">Aiden Vance</span> — a senior video editor &
-            colorist crafting <em className="text-primary not-italic">premium commercials</em>,
-            music videos and short films for brands and artists worldwide.
+            I&apos;m <span className="text-foreground">Narasimha Manam</span> — a Beginner video editor <em className="text-primary not-italic">premium commercials</em>,
+            Birthday typography, Yt shorts, Insta reels, and more. I craft compelling narratives that captivate audiences and elevate brands through the art of video editing.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -51,9 +50,9 @@ const Hero = () => {
 
           <div className="flex items-center gap-8 pt-8">
             {[
-              { k: "120+", v: "Projects" },
-              { k: "8 Yrs", v: "Experience" },
-              { k: "32", v: "Awards" },
+              { k: "50", v: "Projects" },
+              { k: "2 Yrs", v: "Experience" },
+              { k: "90%", v: "Satisfaction" },
             ].map((s) => (
               <div key={s.v}>
                 <div className="font-display text-2xl text-foreground">{s.k}</div>
@@ -82,7 +81,7 @@ const Hero = () => {
             <div className="relative h-full w-full overflow-hidden rounded-[2rem] glass-strong animate-float-slow">
               <img
                 src={profile}
-                alt="Aiden Vance, cinematic video editor portrait"
+                alt="Narasimha Manam, cinematic video editor portrait"
                 width={1024}
                 height={1280}
                 className="h-full w-full object-cover"

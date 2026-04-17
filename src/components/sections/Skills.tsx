@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Film, Palette, Sparkles, Music, Wand2, Camera } from "lucide-react";
 
 const skills = [
-  { name: "Adobe Premiere Pro", level: 98, icon: Film },
-  { name: "DaVinci Resolve", level: 95, icon: Palette },
-  { name: "After Effects", level: 90, icon: Sparkles },
-  { name: "Sound Design / Pro Tools", level: 82, icon: Music },
-  { name: "Cinema 4D / Motion", level: 76, icon: Wand2 },
-  { name: "Cinematography & RAW", level: 88, icon: Camera },
+  { name: "Capcut", level: 98, icon: Film },
+  { name: "Alight Motion", level: 95, icon: Palette },
+  { name: "Node Video", level: 90, icon: Sparkles },
+  { name: "VN", level: 82, icon: Music },
+  { name: "Topography", level: 76, icon: Wand2 },
+  { name: "Picsart", level: 70, icon: Camera },
 ];
 
 const Skills = () => {
@@ -49,8 +49,8 @@ const Skills = () => {
         </div>
 
         <h2 data-reveal className="mb-16 font-display text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.05]">
-          <span className="text-foreground">Tools of the</span>{" "}
-          <span className="text-gradient-primary italic">trade.</span>
+          <span className="text-foreground">Tools </span>{" "}
+          <span className="text-gradient-primary italic">used.</span>
         </h2>
 
         <div className="grid grid-cols-1 gap-x-12 gap-y-8 md:grid-cols-2">

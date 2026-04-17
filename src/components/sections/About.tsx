@@ -59,9 +59,7 @@ const About = () => {
               ))}
             </p>
             <p className="mb-6 text-base leading-relaxed text-muted-foreground">
-              Over the last <span className="text-foreground">8 years</span>, I&apos;ve cut for
-              global brands, indie artists and award-winning directors. My obsession lives in the
-              edit room: rhythm, contrast, restraint — and that one frame that changes everything.
+            Over the last <span className="text-foreground">2+ years</span>, I&apos;ve worked as a mobile video editor, creating engaging content for many clients using tools like Alight Motion, CapCut, Node Video, VN, InShot, KineMaster, and Premiere Pro. My passion is turning raw clips into smooth, eye-catching edits with creativity, rhythm, and impact.
             </p>
             <p className="text-base leading-relaxed text-muted-foreground">
               I work end-to-end — from offline edit and sound design to grade and finishing — so the
@@ -71,10 +69,10 @@ const About = () => {
 
           <div className="md:col-span-5 space-y-4" data-reveal>
             {[
-              { label: "Based in", value: "Los Angeles · Remote" },
-              { label: "Specialty", value: "Commercials · Music Videos · Film" },
-              { label: "Toolkit", value: "Premiere · DaVinci · After Effects" },
-              { label: "Languages", value: "English · French" },
+              { label: "Based in", value: "Guntur - India · Remote" },
+              { label: "Specialty", value: "Commercials · Birthday · Promotions · Music Videos ·  Short Films" },
+              { label: "Toolkit", value: "Capcut · Alight motion · Node Video · VN · Premiere Pro" },
+              { label: "Languages", value: "English · Telugu · Hindi" },
             ].map((row) => (
               <div
                 key={row.label}

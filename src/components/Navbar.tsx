@@ -30,10 +30,10 @@ const Navbar = () => {
         >
           <a href="#" className="flex items-center gap-2.5" data-cursor="hover">
             <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary-glow font-display text-xs text-primary-foreground shadow-[0_0_20px_hsl(var(--primary)/0.5)]">
-              AV
+              NM
             </span>
             <span className="hidden font-display text-xs uppercase tracking-[0.3em] text-foreground sm:inline">
-              Aiden<span className="text-primary">.</span>Vance
+              Narasimha<span className="text-primary">.</span>Manam
             </span>
           </a>
 
