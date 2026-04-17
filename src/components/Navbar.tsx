@@ -4,7 +4,7 @@ const links = [
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "#contact-form" },
 ];
 
 const Navbar = () => {
@@ -52,7 +52,7 @@ const Navbar = () => {
           </ul>
 
           <a
-            href="#contact"
+            href="#contact-form"
             data-cursor="hover"
             className="rounded-full border border-primary/40 bg-primary/10 px-5 py-2 text-[10px] font-medium uppercase tracking-[0.25em] text-foreground transition-all hover:border-primary hover:bg-primary/20 hover:shadow-[0_0_20px_hsl(var(--primary)/0.4)]"
           >
