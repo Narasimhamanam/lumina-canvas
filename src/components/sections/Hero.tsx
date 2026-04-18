@@ -5,7 +5,7 @@ import { Play, ArrowDown } from "lucide-react";
 
 const HeroFrame = lazy(() => import("@/components/three/HeroFrame"));
 
-const Hero = () => {
+const Hero = ({ onOpenQuote }: { onOpenQuote?: () => void }) => {
   return (
     <section className="relative min-h-screen w-full overflow-hidden gradient-hero noise pt-32 pb-20">
       {/* Grid */}
