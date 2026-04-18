@@ -5,7 +5,7 @@ import { Play, ArrowDown } from "lucide-react";
 
 const HeroFrame = lazy(() => import("@/components/three/HeroFrame"));
 
-const Hero = () => {
+const Hero = ({ onOpenQuote }: { onOpenQuote?: () => void }) => {
   return (
     <section className="relative min-h-screen w-full overflow-hidden gradient-hero noise pt-32 pb-20">
       {/* Grid */}
@@ -29,23 +29,40 @@ const Hero = () => {
           </div>
 
           <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold leading-[0.95] tracking-tight">
-            {/* <span className="block text-foreground">Mobile</span> */}
-            <span className="block text-gradient-primary">Video</span>
-            <span className="block text-foreground/90">Editor</span>
+            <span className="block text-gradient-primary">Premium</span>
+            <span className="block text-foreground/90">Video Editor</span>
           </h1>
 
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            I&apos;m <span className="text-foreground">Narasimha Manam</span> — a Beginner video editor <em className="text-primary not-italic">premium commercials</em>,
-            Birthday typography, Yt shorts, Insta reels, and more. I craft compelling narratives that captivate audiences and elevate brands through the art of video editing.
+            I&apos;m <span className="text-foreground">Narasimha Manam</span> — a mobile-first video editor crafting{" "}
+            <em className="text-gradient-accent not-italic font-semibold">premium commercials</em>,
+            cinematic birthday edits, viral Reels & Shorts, and brand promos that move people.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <MagneticButton href="#work" variant="primary">
-              <Play className="h-4 w-4" /> View Showreel
+              <Play className="h-4 w-4" /> View Work
             </MagneticButton>
-            <MagneticButton href="#contact" variant="ghost">
-              Start a Project
-            </MagneticButton>
+            {onOpenQuote ? (
+              <button
+                onClick={onOpenQuote}
+                className="magnetic-btn rounded-full border border-secondary/40 bg-secondary/10 px-6 py-3 text-xs font-medium uppercase tracking-[0.2em] text-foreground transition-all hover:border-secondary hover:bg-secondary/20 hover:shadow-[0_0_24px_hsl(var(--secondary)/0.45)]"
+                data-cursor="hover"
+              >
+                Book Project
+              </button>
+            ) : (
+              <MagneticButton href="#contact-form" variant="ghost">Book Project</MagneticButton>
+            )}
+            <a
+              href="https://wa.me/919999999999?text=Hi%20Narasimha%2C%20I%20want%20to%20discuss%20a%20project"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="hover"
+              className="magnetic-btn rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 px-6 py-3 text-xs font-medium uppercase tracking-[0.2em] text-white shadow-[0_0_20px_rgba(16,185,129,0.45)] transition-all hover:scale-[1.04]"
+            >
+              WhatsApp
+            </a>
           </div>
 
           <div className="flex items-center gap-8 pt-8">

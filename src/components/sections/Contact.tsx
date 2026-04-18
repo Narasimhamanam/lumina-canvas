@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { z } from "zod";
 import { Send, Loader2, CheckCircle2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Name is too short").max(80),
@@ -53,34 +54,31 @@ const Contact = () => {
       setErrors({});
       setSubmitting(true);
 
-      await fetch("/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          "form-name": "contact",
-          name: data.name,
-          email: data.email,
-          budget: data.budget,
-          message: data.message,
-        }).toString(),
+      const { error } = await supabase.from("leads").insert({
+        name: data.name,
+        email: data.email,
+        budget: data.budget || null,
+        message: data.message,
+        source: "contact_form",
       });
 
       setSubmitting(false);
-      setDone(true);
 
+      if (error) {
+        toast({ title: "Failed", description: error.message });
+        return;
+      }
+
+      setDone(true);
       toast({
         title: "Message Sent ✦",
-        description: "Thanks — I will reply soon.",
+        description: "Thanks — I will reply within 24h.",
       });
 
       form.reset();
-
       setTimeout(() => setDone(false), 4000);
     } catch (error) {
       setSubmitting(false);
-
       toast({
         title: "Failed",
         description: "Could not send message.",
@@ -156,7 +154,7 @@ const Contact = () => {
             />
 
             {errors.message && (
-              <p className="mt-2 text-xs text-red-500">{errors.message}</p>
+              <p className="mt-2 text-xs text-destructive">{errors.message}</p>
             )}
           </div>
 
@@ -213,7 +211,7 @@ const Field = ({
       className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm"
     />
 
-    {error && <p className="mt-2 text-xs text-red-500">{error}</p>}
+    {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
   </div>
 );
 
