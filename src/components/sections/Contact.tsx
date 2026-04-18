@@ -154,7 +154,7 @@ const Contact = () => {
             />
 
             {errors.message && (
-              <p className="mt-2 text-xs text-red-500">{errors.message}</p>
+              <p className="mt-2 text-xs text-destructive">{errors.message}</p>
             )}
           </div>
 
@@ -211,7 +211,7 @@ const Field = ({
       className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm"
     />
 
-    {error && <p className="mt-2 text-xs text-red-500">{error}</p>}
+    {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
   </div>
 );
 
