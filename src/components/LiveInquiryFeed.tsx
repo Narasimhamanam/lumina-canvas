@@ -58,8 +58,14 @@ const LiveInquiryFeed = () => {
       )
       .subscribe();
 
+    const onFocus = () => load();
+    window.addEventListener("focus", onFocus);
+    const poll = setInterval(load, 20000);
+
     return () => {
       mounted = false;
+      window.removeEventListener("focus", onFocus);
+      clearInterval(poll);
       supabase.removeChannel(channel);
     };
   }, []);
