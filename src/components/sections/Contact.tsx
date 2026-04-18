@@ -4,10 +4,10 @@ import { Send, Loader2, CheckCircle2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const schema = z.object({
-  name: z.string().trim().min(2, "Name is too short").max(80, "Name is too long"),
-  email: z.string().trim().email("Enter a valid email").max(180),
-  budget: z.string().max(40).optional(),
-  message: z.string().trim().min(10, "Tell me a little more").max(1200, "Keep it under 1200 chars"),
+  name: z.string().trim().min(2, "Name is too short").max(80),
+  email: z.string().trim().email("Enter valid email"),
+  budget: z.string().optional(),
+  message: z.string().trim().min(10, "Tell more details").max(1200),
 });
 
 type Errors = Partial<Record<keyof z.infer<typeof schema>, string>>;
@@ -19,94 +19,166 @@ const Contact = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+
+    const form = e.currentTarget;
+
+    const fd = new FormData(form);
+
     const data = {
       name: String(fd.get("name") || ""),
       email: String(fd.get("email") || ""),
       budget: String(fd.get("budget") || ""),
       message: String(fd.get("message") || ""),
     };
+
     const parsed = schema.safeParse(data);
+
     if (!parsed.success) {
       const errs: Errors = {};
       parsed.error.issues.forEach((i) => {
         errs[i.path[0] as keyof Errors] = i.message;
       });
+
       setErrors(errs);
-      toast({ title: "Please check the form", description: "A few fields need attention." });
+
+      toast({
+        title: "Check the form",
+        description: "Some fields need attention.",
+      });
+
       return;
     }
-    setErrors({});
-    setSubmitting(true);
-    // Simulated send — backend wiring lands in Phase 3
-    await new Promise((r) => setTimeout(r, 900));
-    setSubmitting(false);
-    setDone(true);
-    toast({
-      title: "Message sent ✦",
-      description: "Thanks — I'll reply within 24 hours.",
-    });
-    (e.target as HTMLFormElement).reset();
-    setTimeout(() => setDone(false), 4000);
+
+    try {
+      setErrors({});
+      setSubmitting(true);
+
+      await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          name: data.name,
+          email: data.email,
+          budget: data.budget,
+          message: data.message,
+        }).toString(),
+      });
+
+      setSubmitting(false);
+      setDone(true);
+
+      toast({
+        title: "Message Sent ✦",
+        description: "Thanks — I will reply soon.",
+      });
+
+      form.reset();
+
+      setTimeout(() => setDone(false), 4000);
+    } catch (error) {
+      setSubmitting(false);
+
+      toast({
+        title: "Failed",
+        description: "Could not send message.",
+      });
+    }
   };
 
   return (
     <section id="contact-form" className="relative py-32 overflow-hidden">
-      <div className="pointer-events-none absolute -top-20 left-1/3 h-[400px] w-[400px] rounded-full bg-secondary/10 blur-[140px]" />
-      <div className="pointer-events-none absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-primary/10 blur-[140px]" />
-
       <div className="container relative mx-auto max-w-3xl">
+
         <div className="mb-12 flex items-center gap-4">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">/ 05</span>
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
+            / 05
+          </span>
           <span className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent" />
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">Start a Project</span>
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            Start a Project
+          </span>
         </div>
 
-        <h2 className="mb-10 font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.05]">
-          <span className="text-foreground">If you need a</span>{" "}
-          <span className="text-gradient-primary italic">Project.</span>
+        <h2 className="mb-10 font-display text-[clamp(2rem,5vw,3.5rem)] font-bold">
+          Need an <span className="text-gradient-primary italic">Edit?</span>
         </h2>
 
-        <form onSubmit={onSubmit} className="glass-strong rounded-2xl p-6 sm:p-10 space-y-6" noValidate>
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onSubmit={onSubmit}
+          className="glass-strong rounded-2xl p-6 sm:p-10 space-y-6"
+          noValidate
+        >
+          {/* Hidden fields required by Netlify */}
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="bot-field" />
+
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <Field label="Name" name="name" placeholder="Your full name" error={errors.name} />
-            <Field label="Email" name="email" type="email" placeholder="you@gmail.com" error={errors.email} />
+            <Field
+              label="Name"
+              name="name"
+              placeholder="Your full name"
+              error={errors.name}
+            />
+
+            <Field
+              label="Email"
+              name="email"
+              type="email"
+              placeholder="you@gmail.com"
+              error={errors.email}
+            />
           </div>
 
-          <Field label="Budget (optional)" name="budget" placeholder=">100rs" error={errors.budget} />
+          <Field
+            label="Budget"
+            name="budget"
+            placeholder="100rs / 500rs / 1000rs"
+            error={errors.budget}
+          />
 
           <div>
             <label className="mb-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
               Project Brief
             </label>
+
             <textarea
               name="message"
               rows={5}
-              maxLength={1200}
-              placeholder="Tell me about the Edit type, theme, song, duration…"
-              data-cursor="hover"
-              className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary/60 focus:shadow-[0_0_30px_hsl(var(--primary)/0.15)]"
+              placeholder="Tell me your edit type, style, song, duration..."
+              className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm"
             />
-            {errors.message && <p className="mt-2 text-xs text-destructive">{errors.message}</p>}
+
+            {errors.message && (
+              <p className="mt-2 text-xs text-red-500">{errors.message}</p>
+            )}
           </div>
 
           <button
             type="submit"
             disabled={submitting || done}
-            data-cursor="hover"
-            className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary to-primary-glow px-8 py-3.5 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground shadow-[0_0_30px_hsl(var(--primary)/0.5)] transition-all hover:shadow-[0_0_50px_hsl(var(--primary)/0.8)] disabled:opacity-70"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-primary-glow px-8 py-3 text-sm uppercase"
           >
             {submitting ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Sending
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Sending
               </>
             ) : done ? (
               <>
-                <CheckCircle2 className="h-4 w-4" /> Sent
+                <CheckCircle2 className="h-4 w-4" />
+                Sent
               </>
             ) : (
               <>
-                Send Message <Send className="h-4 w-4" />
+                Send Message
+                <Send className="h-4 w-4" />
               </>
             )}
           </button>
@@ -130,15 +202,18 @@ const Field = ({
   error?: string;
 }) => (
   <div>
-    <label className="mb-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-primary">{label}</label>
+    <label className="mb-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
+      {label}
+    </label>
+
     <input
       name={name}
       type={type}
       placeholder={placeholder}
-      data-cursor="hover"
-      className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none transition-all focus:border-primary/60 focus:shadow-[0_0_30px_hsl(var(--primary)/0.15)]"
+      className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm"
     />
-    {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
+
+    {error && <p className="mt-2 text-xs text-red-500">{error}</p>}
   </div>
 );
 
