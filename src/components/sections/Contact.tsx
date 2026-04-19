@@ -57,7 +57,7 @@ const Contact = () => {
         `I want a ${data.message} and my estimated budget is ₹${data.budget}. ` +
         `If you like, we can have a chat on this.`;
 
-      const whatsappURL = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(
+      const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
         whatsappMessage
       )}`;
 
