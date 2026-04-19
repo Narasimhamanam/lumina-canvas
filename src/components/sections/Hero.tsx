@@ -55,7 +55,7 @@ const Hero = ({ onOpenQuote }: { onOpenQuote?: () => void }) => {
               <MagneticButton href="#contact-form" variant="ghost">Book Project</MagneticButton>
             )}
             <a
-              href="https://wa.me/919999999999?text=Hi%20Narasimha%2C%20I%20want%20to%20discuss%20a%20project"
+              href="https://wa.me/917386464170?text=Hi%20Narasimha%2C%20I%20want%20to%20discuss%20a%20project"
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="hover"

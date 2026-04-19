@@ -4,11 +4,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
 const TYPES = [
-  { id: "birthday", label: "Birthday Edit", base: 700 },
-  { id: "shorts", label: "Reels / Shorts", base: 500 },
-  { id: "promo", label: "Promo / Event", base: 1500 },
-  { id: "wedding", label: "Wedding Highlight", base: 3500 },
-  { id: "commercial", label: "Brand Commercial", base: 5000 },
+  { id: "birthday", label: "Birthday Edit", base: 500 },
+  { id: "shorts", label: "Reels / Shorts", base: 350 },
+  { id: "promo", label: "Promo / Event", base: 1000 },
+  { id: "wedding", label: "Wedding Highlight", base: 2500 },
+  { id: "commercial", label: "Brand Commercial", base: 3500 },
 ];
 
 const EFFECTS = [
@@ -75,7 +75,7 @@ const QuoteCalculator = ({ open, onClose }: Props) => {
     setDone(true);
     toast({ title: "Quote locked ✦", description: `Estimate: ₹${price.toLocaleString("en-IN")}` });
     setTimeout(() => {
-      const wa = `https://wa.me/919999999999?text=${encodeURIComponent(
+      const wa = `https://wa.me/917386464170?text=${encodeURIComponent(
         `Hi Narasimha! I got an instant quote of ₹${price.toLocaleString("en-IN")} for a ${
           TYPES.find((t) => t.id === type)?.label
         } (${duration} min, ${effects} fx, ${days}d turnaround). Let's discuss.`
