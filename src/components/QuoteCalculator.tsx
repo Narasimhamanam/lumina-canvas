@@ -75,7 +75,7 @@ const QuoteCalculator = ({ open, onClose }: Props) => {
     setDone(true);
     toast({ title: "Quote locked ✦", description: `Estimate: ₹${price.toLocaleString("en-IN")}` });
     setTimeout(() => {
-      const wa = `https://wa.me/917386464170?text=${encodeURIComponent(
+      const wa = `https://api.whatsapp.com/send?phone=917386464170&text=${encodeURIComponent(
         `Hi Narasimha! I got an instant quote of ₹${price.toLocaleString("en-IN")} for a ${
           TYPES.find((t) => t.id === type)?.label
         } (${duration} min, ${effects} fx, ${days}d turnaround). Let's discuss.`

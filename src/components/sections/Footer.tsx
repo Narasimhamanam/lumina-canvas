@@ -5,7 +5,7 @@ const socials = [
   { icon: Youtube, href: "https://www.youtube.com/@Flickfusion_beats", label: "YouTube" },
   { 
   icon: MessageCircle, 
-  href: "https://wa.me/917386464170", 
+  href: "https://api.whatsapp.com/send?phone=917386464170", 
   label: "WhatsApp" 
 },
 { icon: Mail, href: "mailto:narasimhamanam6014@gmail.com", label: "Email" },
