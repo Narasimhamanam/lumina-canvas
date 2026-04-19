@@ -1,12 +1,9 @@
 const CLIENTS = [
-  "RVR & JC College",
+  "RVR & JC College of Engineering",
   "Ganesh Youth Assoc.",
-  "Bhavani Properties",
   "Stories by Vihaa",
-  "Akhila Studios",
-  "Diya Productions",
-  "Ajith Films",
-  "Pavan Media",
+  "Santosh Infra",
+  "Ravi Productions",
 ];
 
 const ClientsWall = () => {
