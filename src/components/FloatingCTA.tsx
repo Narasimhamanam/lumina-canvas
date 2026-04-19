@@ -1,7 +1,7 @@
 import { MessageCircle, Calculator } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const WHATSAPP = "https://wa.me/917386464170?text=Hi%20Narasimha%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20discuss%20a%20project.";
+const WHATSAPP = "https://api.whatsapp.com/send?phone=917386464170&text=Hi%20Narasimha%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20discuss%20a%20project.";
 
 const FloatingCTA = ({ onOpenQuote }: { onOpenQuote: () => void }) => {
   const [show, setShow] = useState(false);
