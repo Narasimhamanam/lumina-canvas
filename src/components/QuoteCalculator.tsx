@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { X, Sparkles, MessageCircle, Loader2, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 const TYPES = [
   { id: "birthday", label: "Birthday Edit", base: 500 },
@@ -30,6 +31,7 @@ interface Props {
 }
 
 const QuoteCalculator = ({ open, onClose }: Props) => {
+  const { data: contact } = useSiteContent("contact");
   const [type, setType] = useState(TYPES[0].id);
   const [duration, setDuration] = useState(2);
   const [effects, setEffects] = useState(EFFECTS[1].id);
@@ -75,7 +77,7 @@ const QuoteCalculator = ({ open, onClose }: Props) => {
     setDone(true);
     toast({ title: "Quote locked ✦", description: `Estimate: ₹${price.toLocaleString("en-IN")}` });
     setTimeout(() => {
-      const wa = `https://wa.me/917386464170?text=${encodeURIComponent(
+      const wa = `https://wa.me/${contact.whatsapp || "917386464170"}?text=${encodeURIComponent(
         `Hi Narasimha! I got an instant quote of ₹${price.toLocaleString("en-IN")} for a ${
           TYPES.find((t) => t.id === type)?.label
         } (${duration} min, ${effects} fx, ${days}d turnaround). Let's discuss.`
@@ -88,70 +90,61 @@ const QuoteCalculator = ({ open, onClose }: Props) => {
 
   return (
     <div
-      className="fixed inset-0 z-[150] flex items-center justify-center bg-surface-deep/85 p-4 backdrop-blur-xl animate-fade-in"
+      className="fixed inset-0 z-[150] flex items-end sm:items-center justify-center bg-surface-deep/85 p-0 sm:p-4 backdrop-blur-xl animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl overflow-hidden rounded-2xl glass-strong animate-scale-in"
+        className="relative w-full sm:max-w-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl glass-strong animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-foreground transition-all hover:border-primary hover:bg-primary/20"
+          className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-foreground transition-all hover:border-primary hover:bg-primary/20"
         >
           <X className="h-4 w-4" />
         </button>
 
-        <div className="relative p-6 sm:p-10">
-          <div className="mb-6 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary glow-primary">
-              <Sparkles className="h-5 w-5 text-white" />
+        <div className="relative p-4 sm:p-8">
+          <div className="mb-4 sm:mb-6 flex items-center gap-3">
+            <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary glow-primary">
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
             </div>
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary">AI Quote Engine</div>
-              <h3 className="font-display text-xl text-foreground">Instant Estimate</h3>
+              <div className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-primary">AI Quote Engine</div>
+              <h3 className="font-display text-lg sm:text-xl text-foreground">Instant Estimate</h3>
             </div>
           </div>
 
-          <div className="space-y-5">
+          <div className="space-y-4 sm:space-y-5">
             <Field label="Project type">
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {TYPES.map((t) => (
-                  <Pill key={t.id} active={type === t.id} onClick={() => setType(t.id)}>
-                    {t.label}
-                  </Pill>
+                  <Pill key={t.id} active={type === t.id} onClick={() => setType(t.id)}>{t.label}</Pill>
                 ))}
               </div>
             </Field>
 
             <Field label={`Duration · ${duration} min`}>
               <input
-                type="range"
-                min={1}
-                max={10}
-                value={duration}
+                type="range" min={1} max={10} value={duration}
                 onChange={(e) => setDuration(Number(e.target.value))}
                 className="w-full accent-[hsl(var(--primary))]"
               />
             </Field>
 
             <Field label="Effects level">
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {EFFECTS.map((e) => (
-                  <Pill key={e.id} active={effects === e.id} onClick={() => setEffects(e.id)}>
-                    {e.label}
-                  </Pill>
+                  <Pill key={e.id} active={effects === e.id} onClick={() => setEffects(e.id)}>{e.label}</Pill>
                 ))}
               </div>
             </Field>
 
             <Field label="Turnaround">
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {TURNAROUND.map((d) => (
-                  <Pill key={d.id} active={days === d.id} onClick={() => setDays(d.id)}>
-                    {d.label}
-                  </Pill>
+                  <Pill key={d.id} active={days === d.id} onClick={() => setDays(d.id)}>{d.label}</Pill>
                 ))}
               </div>
             </Field>
@@ -162,31 +155,25 @@ const QuoteCalculator = ({ open, onClose }: Props) => {
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Will appear on the live feed"
                 maxLength={40}
-                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none focus:border-primary/60"
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 sm:px-4 sm:py-3 text-sm outline-none focus:border-primary/60"
               />
             </Field>
           </div>
 
-          <div className="mt-7 flex flex-col items-stretch gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-5 sm:mt-7 flex flex-col items-stretch gap-3 sm:gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Estimated price</div>
-              <div className="mt-1 font-display text-3xl text-gradient-primary">₹{price.toLocaleString("en-IN")}</div>
-              <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                Final quote may vary by complexity
-              </div>
+              <div className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Estimated price</div>
+              <div className="mt-1 font-display text-2xl sm:text-3xl text-gradient-primary">₹{price.toLocaleString("en-IN")}</div>
+              <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">Final quote may vary by complexity</div>
             </div>
             <button
               onClick={submit}
               disabled={submitting || done}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-[0_0_24px_hsl(var(--primary)/0.45)] transition-all hover:scale-[1.02] disabled:opacity-60"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-secondary px-5 sm:px-6 py-2.5 sm:py-3 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-[0_0_24px_hsl(var(--primary)/0.45)] transition-all hover:scale-[1.02] disabled:opacity-60"
             >
-              {submitting ? (
-                <><Loader2 className="h-4 w-4 animate-spin" /> Saving</>
-              ) : done ? (
-                <><Check className="h-4 w-4" /> Sent</>
-              ) : (
-                <><MessageCircle className="h-4 w-4" /> Lock & WhatsApp</>
-              )}
+              {submitting ? (<><Loader2 className="h-4 w-4 animate-spin" /> Saving</>) :
+               done ? (<><Check className="h-4 w-4" /> Sent</>) :
+               (<><MessageCircle className="h-4 w-4" /> Lock & WhatsApp</>)}
             </button>
           </div>
         </div>
@@ -205,7 +192,7 @@ const Field = ({ label, children }: { label: string; children: React.ReactNode }
 const Pill = ({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) => (
   <button
     onClick={onClick}
-    className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.2em] transition-all ${
+    className={`rounded-full border px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs uppercase tracking-[0.2em] transition-all ${
       active
         ? "border-primary bg-primary/15 text-foreground shadow-[0_0_18px_hsl(var(--primary)/0.4)]"
         : "border-white/10 bg-white/5 text-muted-foreground hover:border-primary/50 hover:text-foreground"

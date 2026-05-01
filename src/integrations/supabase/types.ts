@@ -77,6 +77,69 @@ export type Database = {
         }
         Relationships: []
       }
+      site_content: {
+        Row: {
+          id: string
+          key: string
+          updated_at: string
+          value: Json
+        }
+        Insert: {
+          id?: string
+          key: string
+          updated_at?: string
+          value?: Json
+        }
+        Update: {
+          id?: string
+          key?: string
+          updated_at?: string
+          value?: Json
+        }
+        Relationships: []
+      }
+      work_videos: {
+        Row: {
+          category: string
+          client: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          poster_url: string | null
+          sort_order: number
+          title: string
+          updated_at: string
+          video_url: string
+          year: string | null
+        }
+        Insert: {
+          category?: string
+          client?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          poster_url?: string | null
+          sort_order?: number
+          title: string
+          updated_at?: string
+          video_url: string
+          year?: string | null
+        }
+        Update: {
+          category?: string
+          client?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          poster_url?: string | null
+          sort_order?: number
+          title?: string
+          updated_at?: string
+          video_url?: string
+          year?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

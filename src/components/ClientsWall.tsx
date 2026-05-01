@@ -1,13 +1,10 @@
-const CLIENTS = [
-  "RVR & JC College of Engineering",
-  "Ganesh Youth Assoc.",
-  "Stories by Vihaa",
-  "Santosh Infra",
-  "Ravi Productions",
-];
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 const ClientsWall = () => {
-  const list = [...CLIENTS, ...CLIENTS];
+  const { data } = useSiteContent("clients");
+  const items = data.items;
+  const list = [...items, ...items];
+  if (items.length === 0) return null;
   return (
     <section className="relative py-16">
       <div className="container mx-auto">
@@ -19,10 +16,7 @@ const ClientsWall = () => {
       <div className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_15%,black_85%,transparent)]">
         <div className="marquee flex w-max items-center gap-12 px-6">
           {list.map((c, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-3 whitespace-nowrap font-display text-lg text-muted-foreground/70 hover:text-foreground transition-colors"
-            >
+            <div key={i} className="flex items-center gap-3 whitespace-nowrap font-display text-lg text-muted-foreground/70 hover:text-foreground transition-colors">
               <span className="h-1.5 w-1.5 rounded-full bg-primary/60 shadow-[0_0_8px_hsl(var(--primary))]" />
               {c}
             </div>
