@@ -1,10 +1,11 @@
 import { MessageCircle, Calculator } from "lucide-react";
 import { useEffect, useState } from "react";
-
-const WHATSAPP = "https://wa.me/917386464170?text=Hi%20Narasimha%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20discuss%20a%20project.";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 const FloatingCTA = ({ onOpenQuote }: { onOpenQuote: () => void }) => {
   const [show, setShow] = useState(false);
+  const { data } = useSiteContent("contact");
+  const WHATSAPP = `https://wa.me/${data.whatsapp || "917386464170"}?text=${encodeURIComponent("Hi Narasimha, I saw your portfolio and want to discuss a project.")}`;
 
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 600);
