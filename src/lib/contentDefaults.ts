@@ -64,6 +64,6 @@ export const DEFAULT_CONTENT = {
     instagram: "https://instagram.com/narasimhachowdary_",
     youtube: "https://www.youtube.com/@Flickfusion_beats",
   },
-} as const;
+};
 
 export type ContentKey = keyof typeof DEFAULT_CONTENT;
